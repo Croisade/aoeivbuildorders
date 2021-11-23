@@ -36,9 +36,6 @@ const App = function App() {
       setCount(count + 1)
       setBuildOrderRow(concat(buildOrderRow, { ...values, count }))
       resetForm()
-      // eslint-disable-next-line no-promise-executor-return
-      await new Promise(resolve => setTimeout(resolve, 500))
-      alert(JSON.stringify(values, null, 2))
     },
   })
 
@@ -58,117 +55,126 @@ const App = function App() {
           Construct Your Build Order
         </Typography>
         <Box sx={{ flexGrow: 1, width: '70%' }}>
-          <Grid container spacing={0}>
-            <Grid item xs={8}>
+          <Grid container spacing={5}>
+            <Grid item sm={8} xs="auto">
               <Box
                 sx={{
                   '& .MuiTextField-root': { m: 1 },
                 }}
               >
                 <form onSubmit={formik.handleSubmit}>
-                  <Grid container item spacing={3} xs="auto" sx={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <TextField
-                      color="secondary"
-                      name="time"
-                      label="Time"
-                      type="search"
-                      id="standard-time"
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.time}
-                      sx={{ width: '50px' }}
-                    />
+                  <Grid container item spacing={3} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Grid item sm={1.14} xs={6}>
+                      <TextField
+                        color="secondary"
+                        name="time"
+                        label="Time"
+                        type="search"
+                        id="standard-time"
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.time}
+                        sx={{ width: '50px' }}
+                      />
+                    </Grid>
 
-                    <TextField
-                      color="secondary"
-                      name="population"
-                      label="Population"
-                      type="search"
-                      id="standard-population"
-                      variant="standard"
-                      sx={{ width: '80px' }}
-                      onChange={formik.handleChange}
-                      value={formik.values.population}
-                    />
+                    <Grid item md={1.14} xs={6}>
+                      <TextField
+                        color="secondary"
+                        name="population"
+                        label="Pop.`"
+                        type="search"
+                        id="standard-population"
+                        variant="standard"
+                        sx={{ width: '50px' }}
+                        onChange={formik.handleChange}
+                        value={formik.values.population}
+                      />
+                    </Grid>
 
-                    <TextField
-                      color="secondary"
-                      name="wood"
-                      label="Wood"
-                      type="search"
-                      id="standard-wood"
-                      sx={{ width: '50px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.wood}
-                    />
-                    <TextField
-                      color="secondary"
-                      name="food"
-                      label="Food"
-                      type="search"
-                      id="standard-food"
-                      sx={{ width: '50px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.food}
-                    />
+                    <Grid item sm={1.14} xs={6}>
+                      <TextField
+                        color="secondary"
+                        name="wood"
+                        label="Wood"
+                        type="search"
+                        id="standard-wood"
+                        sx={{ width: '50px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.wood}
+                      />
+                    </Grid>
 
-                    <TextField
-                      color="secondary"
-                      name="gold"
-                      label="Gold"
-                      type="search"
-                      id="standard-gold"
-                      sx={{ width: '50px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.gold}
-                    />
+                    <Grid item sm={1.14} xs="auto">
+                      <TextField
+                        color="secondary"
+                        name="food"
+                        label="Food"
+                        type="search"
+                        id="standard-food"
+                        sx={{ width: '50px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.food}
+                      />
+                    </Grid>
 
-                    <TextField
-                      color="secondary"
-                      name="stone"
-                      label="Stone"
-                      type="search"
-                      id="standard-stone"
-                      sx={{ width: '50px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.stone}
-                    />
+                    <Grid item sm={1.14} xs="auto">
+                      <TextField
+                        color="secondary"
+                        name="gold"
+                        label="Gold"
+                        type="search"
+                        id="standard-gold"
+                        sx={{ width: '50px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.gold}
+                      />
+                    </Grid>
 
-                    <TextField
-                      color="secondary"
-                      name="builders"
-                      label="Builders"
-                      type="search"
-                      id="standard-builders"
-                      sx={{ width: '60px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.builders}
-                    />
-                  </Grid>
+                    <Grid item sm={1.14} xs="auto">
+                      <TextField
+                        color="secondary"
+                        name="stone"
+                        label="Stone"
+                        type="search"
+                        id="standard-stone"
+                        sx={{ width: '50px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.stone}
+                      />
+                    </Grid>
 
-                  <Grid
-                    container
-                    item
-                    spacing={3}
-                    xs="auto"
-                    sx={{ marginTop: '1px', justifyContent: 'center', alignItems: 'center' }}
-                  >
-                    <TextField
-                      color="secondary"
-                      name="action"
-                      label="Action"
-                      type="search"
-                      id="fullWidth"
-                      sx={{ width: '60%', marginTop: '5px' }}
-                      variant="standard"
-                      onChange={formik.handleChange}
-                      value={formik.values.action}
-                    />
+                    <Grid item sm={1.14} xs="auto">
+                      <TextField
+                        color="secondary"
+                        name="builders"
+                        label="Builders"
+                        type="search"
+                        id="standard-builders"
+                        sx={{ width: '60px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.builders}
+                      />
+                    </Grid>
+
+                    <Grid item sm={8} xs="auto">
+                      <TextField
+                        color="secondary"
+                        name="action"
+                        label="Action"
+                        type="search"
+                        id="fullWidth"
+                        sx={{ width: '80%', marginTop: '5px' }}
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        value={formik.values.action}
+                      />
+                    </Grid>
                   </Grid>
                   <Button variant="contained" color="secondary" type="submit" sx={{ width: '64px', height: '38px' }}>
                     Add
@@ -176,13 +182,16 @@ const App = function App() {
                 </form>
               </Box>
               <Box mt={5}>
-                <BuildOrderTable data={buildOrderRow} />
+                <BuildOrderTable data={buildOrderRow} ageNumber={1} isShown />
+                <BuildOrderTable data={buildOrderRow} ageNumber={2} isShown={false} />
+                <BuildOrderTable data={buildOrderRow} ageNumber={3} isShown={false} />
+                <BuildOrderTable data={buildOrderRow} ageNumber={4} isShown={false} />
               </Box>
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item sm={2} xs="auto" ml={0}>
               <TextField
-                id="outlined-select-currency"
+                id="outlined-select-civilization"
                 color="secondary"
                 select
                 label="Select"
@@ -197,16 +206,19 @@ const App = function App() {
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField
-                id="outlined-multiline-static"
-                label="Description"
-                color="secondary"
-                multiline
-                rows={6}
-                placeholder="Enter Description Here"
-                sx={{ width: '308px', marginTop: '20px' }}
-              />
-              <Box sx={{ width: 320, marginTop: '20px' }}>
+
+              <Grid item sm={2} xs="auto">
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Description"
+                  color="secondary"
+                  multiline
+                  rows={6}
+                  placeholder="Enter Description Here"
+                  sx={{ width: '308px', marginTop: '20px' }}
+                />
+              </Grid>
+              <Box sx={{ width: 280, marginTop: '20px' }}>
                 <Box sx={{ m: 3 }} />
                 <Typography gutterBottom>Difficulty</Typography>
                 <Slider
