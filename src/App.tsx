@@ -130,7 +130,7 @@ const App = function App() {
         </Typography>
         <Box sx={{ flexGrow: 1, width: '70%' }}>
           <Grid container spacing={5}>
-            <Grid item sm={8} xs="auto">
+            <Grid item sm={8} xs={12}>
               <Box
                 sx={{
                   '& .MuiTextField-root': { m: 1 },
@@ -236,7 +236,7 @@ const App = function App() {
                       />
                     </Grid>
 
-                    <Grid item sm={8} xs="auto">
+                    <Grid item sm={8} xs={12}>
                       <TextField
                         color="secondary"
                         name="action"
@@ -249,65 +249,88 @@ const App = function App() {
                         value={formik.values.action}
                       />
                     </Grid>
+
+                    <Grid item sm={12} xs={12}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        type="submit"
+                        disabled={!getActiveStatusFromAll()}
+                        sx={{ width: '64px', height: '38px' }}
+                      >
+                        Add
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
-                    disabled={!getActiveStatusFromAll()}
-                    sx={{ width: '64px', height: '38px' }}
-                  >
-                    Add
-                  </Button>
                 </form>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  sx={{ width: '64px', height: '38px' }}
-                  onClick={() => {
-                    setAge1(true)
-                    setActive('age1')
-                  }}
+
+                <Grid
+                  container
+                  item
+                  spacing={0}
+                  sx={{ justifyContent: 'center', alignItems: 'center' }}
+                  mt={3}
+                  xs="auto"
                 >
-                  Age 1
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  sx={{ width: '64px', height: '38px' }}
-                  onClick={() => {
-                    setAge2(true)
-                    setActive('age2')
-                  }}
-                >
-                  Age 2
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  sx={{ width: '64px', height: '38px' }}
-                  onClick={() => {
-                    setAge3(true)
-                    setActive('age3')
-                  }}
-                >
-                  Age 3
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  sx={{ width: '64px', height: '38px' }}
-                  onClick={() => {
-                    setAge4(true)
-                    setActive('age4')
-                  }}
-                >
-                  Age IV
-                </Button>
+                  <Grid item md={1.5} sm="auto">
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      type="submit"
+                      sx={{ width: '80px', height: '38px' }}
+                      onClick={() => {
+                        setAge1(true)
+                        setActive('age1')
+                      }}
+                    >
+                      Age I
+                    </Button>
+                  </Grid>
+
+                  <Grid item md={1.5} sm="auto">
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      type="submit"
+                      sx={{ width: '80px', height: '38px' }}
+                      onClick={() => {
+                        setAge2(true)
+                        setActive('age2')
+                      }}
+                    >
+                      Age II
+                    </Button>
+                  </Grid>
+                  <Grid item md={1.5} sm="auto">
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      type="submit"
+                      sx={{ width: '80px', height: '38px' }}
+                      onClick={() => {
+                        setAge3(true)
+                        setActive('age3')
+                      }}
+                    >
+                      Age III
+                    </Button>
+                  </Grid>
+
+                  <Grid item md={1.5} sm="auto">
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      type="submit"
+                      sx={{ width: '80px', height: '38px' }}
+                      onClick={() => {
+                        setAge4(true)
+                        setActive('age4')
+                      }}
+                    >
+                      Age IV
+                    </Button>
+                  </Grid>
+                </Grid>
               </Box>
               <Box mt={5}>
                 <BuildOrderTable data={buildOrderRowAge1} ageNumber={1} isShown={age1} />
