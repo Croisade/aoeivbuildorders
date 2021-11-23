@@ -1,13 +1,22 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/function-component-definition */
 import * as React from 'react'
-import { useTable } from 'react-table'
+import { Row, useTable } from 'react-table'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import TableHead from '@mui/material/TableHead'
 import TableBody from '@mui/material/TableBody'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import Table from '@mui/material/Table'
+import chunk from 'lodash/chunk'
+import concat from 'lodash/concat'
+import filter from 'lodash/filter'
+import maxBy from 'lodash/maxBy'
+import map from 'lodash/map'
 
 // * Look over materialUI tables API's and clean up our grid
 interface ColumnDetails {
@@ -16,7 +25,7 @@ interface ColumnDetails {
 
 // TODO make this more strict
 export interface BuildOrder {
-  count: number | null
+  count: number
   action: string
   time: string | null
   population: string | null
@@ -33,15 +42,44 @@ export interface Props {
 
 const tenPx = { width: '10px' }
 
+// @tODO correct types for sethooks
 export default function BuildOrderTable({
   data: buildOrderData,
   ageNumber,
   isShown,
+  setBuildOrder,
+  setCount,
 }: {
   data: BuildOrder[]
   ageNumber: number
   isShown: boolean
+  setBuildOrder: any
+  setCount: any
 }) {
+  function subtractBuildOrderCount(buildOrder: BuildOrder[], countFromRow: string): void {
+    if (countFromRow === '0' && buildOrder.length === 1) {
+      setBuildOrder([])
+      setCount(1)
+    } else {
+      const filtered = filter(buildOrder, x => Number(x.count) !== Number(countFromRow) + 1)
+      const chunkedBuildOrder = chunk(filtered, Number(countFromRow))
+      const concated = concat(
+        chunkedBuildOrder[0],
+        map(chunkedBuildOrder[1], x => {
+          const { count } = x
+          return { ...x, ...{ count: count - 1 } }
+        }),
+      )
+      const idk = maxBy(concated, x => x.count)
+      const max = Number(idk?.count) + 1
+      if (max < 1) {
+        setCount(1)
+      }
+      setCount(max)
+      setBuildOrder(concated)
+    }
+  }
+
   const data = React.useMemo<BuildOrder[]>(() => buildOrderData, [buildOrderData])
 
   const columns = React.useMemo<ColumnDetails[]>(
@@ -91,10 +129,21 @@ export default function BuildOrderTable({
           {
             Header: '',
             accessor: 'edit',
+            Cell: () => <EditIcon fontSize="small" sx={{ fontSize: '15px' }} />,
           },
           {
             Header: '',
             accessor: 'delete',
+            Cell: (row: Row<BuildOrder>[]) => (
+              <DeleteIcon
+                fontSize="small"
+                sx={{ fontSize: '15px' }}
+                onClick={() => {
+                  // @ts-ignore
+                  subtractBuildOrderCount(row.data, row.row!.id)
+                }}
+              />
+            ),
           },
         ],
       },
@@ -102,6 +151,7 @@ export default function BuildOrderTable({
     [],
   )
 
+  // @TODO put this in the cell field, less computation the better
   function returnsStyle(key: string) {
     switch (key) {
       case 'count':
@@ -176,13 +226,13 @@ export default function BuildOrderTable({
             prepareRow(row)
 
             return (
-              <tr {...row.getRowProps()}>
+              <TableRow {...row.getRowProps()}>
                 {row.cells.map(cell => (
                   <TableCell {...cell.getCellProps()} sx={returnsStyle(cell.column.id)} size="small">
                     {cell.render('Cell')}
                   </TableCell>
                 ))}
-              </tr>
+              </TableRow>
             )
           })}
         </TableBody>

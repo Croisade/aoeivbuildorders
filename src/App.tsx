@@ -333,10 +333,34 @@ const App = function App() {
                 </Grid>
               </Box>
               <Box mt={5}>
-                <BuildOrderTable data={buildOrderRowAge1} ageNumber={1} isShown={age1} />
-                <BuildOrderTable data={buildOrderRowAge2} ageNumber={2} isShown={age2} />
-                <BuildOrderTable data={buildOrderRowAge3} ageNumber={3} isShown={age3} />
-                <BuildOrderTable data={buildOrderRowAge4} ageNumber={4} isShown={age4} />
+                <BuildOrderTable
+                  data={buildOrderRowAge1}
+                  ageNumber={1}
+                  isShown={age1}
+                  setBuildOrder={getSetActiveBuildOrderAge()}
+                  setCount={setCount}
+                />
+                <BuildOrderTable
+                  data={buildOrderRowAge2}
+                  ageNumber={2}
+                  isShown={age2}
+                  setBuildOrder={getSetActiveBuildOrderAge()}
+                  setCount={setCount}
+                />
+                <BuildOrderTable
+                  data={buildOrderRowAge3}
+                  ageNumber={3}
+                  isShown={age3}
+                  setBuildOrder={getSetActiveBuildOrderAge()}
+                  setCount={setCount}
+                />
+                <BuildOrderTable
+                  data={buildOrderRowAge4}
+                  ageNumber={4}
+                  isShown={age4}
+                  setBuildOrder={getSetActiveBuildOrderAge()}
+                  setCount={setCount}
+                />
               </Box>
             </Grid>
 
