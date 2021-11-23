@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CIVILIZATIONS: string[] = [
-  'China',
   'Abbasid Dynasty',
+  'China',
   'Delhi Sultanate',
   'French',
   'English',
   'Holy Roman Empire',
+  'Mongols',
   'Rus',
 ]
 

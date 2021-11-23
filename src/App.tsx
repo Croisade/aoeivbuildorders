@@ -54,7 +54,9 @@ const App = function App() {
     <div className="App">
       <AppBar />
       <header className="App-header">
-        <h2>Construct Your Build Order</h2>
+        <Typography variant="h3" component="h3" mb={5} mt={2}>
+          Construct Your Build Order
+        </Typography>
         <Box sx={{ flexGrow: 1, width: '70%' }}>
           <Grid container spacing={0}>
             <Grid item xs={8}>
@@ -82,7 +84,7 @@ const App = function App() {
                       name="population"
                       label="Population"
                       type="search"
-                      id="standard-time"
+                      id="standard-population"
                       variant="standard"
                       sx={{ width: '80px' }}
                       onChange={formik.handleChange}
@@ -94,7 +96,7 @@ const App = function App() {
                       name="wood"
                       label="Wood"
                       type="search"
-                      id="standard-time"
+                      id="standard-wood"
                       sx={{ width: '50px' }}
                       variant="standard"
                       onChange={formik.handleChange}
@@ -105,7 +107,7 @@ const App = function App() {
                       name="food"
                       label="Food"
                       type="search"
-                      id="standard-time"
+                      id="standard-food"
                       sx={{ width: '50px' }}
                       variant="standard"
                       onChange={formik.handleChange}
@@ -117,7 +119,7 @@ const App = function App() {
                       name="gold"
                       label="Gold"
                       type="search"
-                      id="standard-time"
+                      id="standard-gold"
                       sx={{ width: '50px' }}
                       variant="standard"
                       onChange={formik.handleChange}
@@ -129,7 +131,7 @@ const App = function App() {
                       name="stone"
                       label="Stone"
                       type="search"
-                      id="standard-time"
+                      id="standard-stone"
                       sx={{ width: '50px' }}
                       variant="standard"
                       onChange={formik.handleChange}
@@ -141,7 +143,7 @@ const App = function App() {
                       name="builders"
                       label="Builders"
                       type="search"
-                      id="standard-time"
+                      id="standard-builders"
                       sx={{ width: '60px' }}
                       variant="standard"
                       onChange={formik.handleChange}
@@ -220,7 +222,6 @@ const App = function App() {
                   color="secondary"
                 />
               </Box>
-
               <Button variant="contained" color="secondary" type="submit">
                 Share
               </Button>
