@@ -96,15 +96,15 @@ export default function BuildOrderTable(props: Props) {
       case 'gold':
         return { background: '#CF8A0A', opacity: 1.0, width: 50, height: 38 }
       case 'stone':
-        return { background: '#878686', opacity: 0.47, width: 50, height: 38 }
+        return { background: 'rgba(135, 134, 134, 0.47)', width: 50, height: 38 }
       case 'builders':
-        return { background: '#FFB763', opacity: 0.47, width: 50, height: 38 }
+        return { background: 'rgba(255, 183, 99, 0.47)', width: 50, height: 38 }
       case 'action':
-        return { background: '#424242', opacity: 0.08, width: 538, height: 38 }
+        return { background: 'rgba(66,66,66,0.08)', width: 538, height: 38 }
       case 'edit':
-        return { background: '#424242', opacity: 0.08, width: 50, height: 38 }
+        return { background: 'rgba(66,66,66,0.08)', width: 50, height: 38 }
       case 'delete':
-        return { background: '#424242', opacity: 0.08, width: 50, height: 38 }
+        return { background: 'rgba(66,66,66,0.08)', width: 50, height: 38 }
       default:
         break
     }

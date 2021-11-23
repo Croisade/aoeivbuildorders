@@ -6,17 +6,16 @@ import reportWebVitals from './reportWebVitals'
 
 const theme = createTheme({
   palette: {
-    background: {
-      default: '#3212121',
-    },
+    mode: 'dark',
     primary: {
       main: '#333337',
     },
     secondary: {
-      main: '#f50057',
+      main: '#2f8bfd',
     },
   },
 })
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
