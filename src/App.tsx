@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import concat from 'lodash/concat'
+import some from 'lodash/some'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
@@ -14,9 +16,20 @@ import { CIVILIZATIONS } from './constants'
 import './App.css'
 
 const App = function App() {
-  const [buildOrderRow, setBuildOrderRow] = useState<BuildOrder[]>([])
+  const [buildOrderRowAge1, setBuildOrderRowAge1] = useState<BuildOrder[]>([])
+  const [buildOrderRowAge2, setBuildOrderRowAge2] = useState<BuildOrder[]>([])
+  const [buildOrderRowAge3, setBuildOrderRowAge3] = useState<BuildOrder[]>([])
+  const [buildOrderRowAge4, setBuildOrderRowAge4] = useState<BuildOrder[]>([])
   const [count, setCount] = useState(1)
-  const [civ, setCiv] = React.useState(CIVILIZATIONS[0])
+  const [civ, setCiv] = useState(CIVILIZATIONS[0])
+  const [age1, setAge1] = useState(false)
+  const [age2, setAge2] = useState(false)
+  const [age3, setAge3] = useState(false)
+  const [age4, setAge4] = useState(false)
+  const [age1Active, setAge1Active] = useState(false)
+  const [age2Active, setAge2Active] = useState(false)
+  const [age3Active, setAge3Active] = useState(false)
+  const [age4Active, setAge4Active] = useState(false)
 
   const initialValues: BuildOrder = {
     count: 1,
@@ -30,11 +43,72 @@ const App = function App() {
     builders: '',
   }
 
+  // @TODO can make more performant using else if
+  function getSetActiveBuildOrderAge() {
+    if (age1Active === true) {
+      return setBuildOrderRowAge1
+    }
+    if (age2Active === true) {
+      return setBuildOrderRowAge2
+    }
+    if (age3Active === true) {
+      return setBuildOrderRowAge3
+    }
+    if (age4Active === true) {
+      return setBuildOrderRowAge4
+    }
+    return setBuildOrderRowAge4
+  }
+
+  function getActiveStatusFromAll() {
+    return some([age1Active, age2Active, age3Active, age4Active])
+  }
+
+  function getActiveBuildOrderAge() {
+    if (age1Active === true) {
+      return buildOrderRowAge1
+    }
+    if (age2Active === true) {
+      return buildOrderRowAge2
+    }
+    if (age3Active === true) {
+      return buildOrderRowAge3
+    }
+    if (age4Active === true) {
+      return buildOrderRowAge4
+    }
+    return buildOrderRowAge4
+  }
+
+  function setActive(active: string) {
+    if (active === 'age1') {
+      setAge1Active(true)
+      setAge2Active(false)
+      setAge3Active(false)
+      setAge4Active(false)
+    } else if (active === 'age2') {
+      setAge1Active(false)
+      setAge2Active(true)
+      setAge3Active(false)
+      setAge4Active(false)
+    } else if (active === 'age3') {
+      setAge1Active(false)
+      setAge2Active(false)
+      setAge3Active(true)
+      setAge4Active(false)
+    } else {
+      setAge1Active(false)
+      setAge2Active(false)
+      setAge3Active(false)
+      setAge4Active(true)
+    }
+  }
+
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { resetForm }) => {
       setCount(count + 1)
-      setBuildOrderRow(concat(buildOrderRow, { ...values, count }))
+      getSetActiveBuildOrderAge()(concat(getActiveBuildOrderAge(), { ...values, count }))
       resetForm()
     },
   })
@@ -82,7 +156,7 @@ const App = function App() {
                       <TextField
                         color="secondary"
                         name="population"
-                        label="Pop.`"
+                        label="Pop."
                         type="search"
                         id="standard-population"
                         variant="standard"
@@ -176,16 +250,70 @@ const App = function App() {
                       />
                     </Grid>
                   </Grid>
-                  <Button variant="contained" color="secondary" type="submit" sx={{ width: '64px', height: '38px' }}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    disabled={!getActiveStatusFromAll()}
+                    sx={{ width: '64px', height: '38px' }}
+                  >
                     Add
                   </Button>
                 </form>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  sx={{ width: '64px', height: '38px' }}
+                  onClick={() => {
+                    setAge1(true)
+                    setActive('age1')
+                  }}
+                >
+                  Age 1
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  sx={{ width: '64px', height: '38px' }}
+                  onClick={() => {
+                    setAge2(true)
+                    setActive('age2')
+                  }}
+                >
+                  Age 2
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  sx={{ width: '64px', height: '38px' }}
+                  onClick={() => {
+                    setAge3(true)
+                    setActive('age3')
+                  }}
+                >
+                  Age 3
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  sx={{ width: '64px', height: '38px' }}
+                  onClick={() => {
+                    setAge4(true)
+                    setActive('age4')
+                  }}
+                >
+                  Age IV
+                </Button>
               </Box>
               <Box mt={5}>
-                <BuildOrderTable data={buildOrderRow} ageNumber={1} isShown />
-                <BuildOrderTable data={buildOrderRow} ageNumber={2} isShown={false} />
-                <BuildOrderTable data={buildOrderRow} ageNumber={3} isShown={false} />
-                <BuildOrderTable data={buildOrderRow} ageNumber={4} isShown={false} />
+                <BuildOrderTable data={buildOrderRowAge1} ageNumber={1} isShown={age1} />
+                <BuildOrderTable data={buildOrderRowAge2} ageNumber={2} isShown={age2} />
+                <BuildOrderTable data={buildOrderRowAge3} ageNumber={3} isShown={age3} />
+                <BuildOrderTable data={buildOrderRowAge4} ageNumber={4} isShown={age4} />
               </Box>
             </Grid>
 

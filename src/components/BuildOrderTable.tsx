@@ -47,13 +47,12 @@ export default function BuildOrderTable({
   const columns = React.useMemo<ColumnDetails[]>(
     () => [
       {
-        // Header: `Age ${ageNumber}`,
         id: 'col1',
         // eslint-disable-next-line react/no-unstable-nested-components
         Header: () => <div style={{ textAlign: 'center', fontSize: '20px' }}>{`Age ${ageNumber}`}</div>,
         columns: [
           {
-            Header: 'hi',
+            Header: '',
             accessor: 'count', // accessor is the "key" in the data
           },
 
@@ -140,14 +139,12 @@ export default function BuildOrderTable({
   function isSubHeader(number: number) {
     if (number > 0) {
       return { display: 'none' }
-      // return { justifyContent: 'center', alignItems: 'center' }
     }
     return {}
   }
 
   function isTableShown(bool: boolean) {
     const general = { maxWidth: '100%', overflow: 'auto' }
-    // const general = { overflow: 'auto' }
     return bool ? general : { display: 'none', ...general }
   }
 
@@ -168,15 +165,12 @@ export default function BuildOrderTable({
             <TableRow {...headerGroup.getHeaderGroupProps()} hover>
               {headerGroup.headers.map(column => (
                 <TableCell {...column.getHeaderProps()} style={isSubHeader(column.depth)}>
-                  {console.log('column', column)}
-                  {console.log(ageNumber)}
                   {column.render('Header')}
                 </TableCell>
               ))}
             </TableRow>
           ))}
         </TableHead>
-        {/* <div style={{ maxWidth: '100%' }}> */}
         <TableBody {...getTableBodyProps()}>
           {rows.map(row => {
             prepareRow(row)
