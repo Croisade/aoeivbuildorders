@@ -27,13 +27,13 @@ interface ColumnDetails {
 export interface BuildOrder {
   count: number
   action: string
-  time: string | null
-  population: string | null
-  wood: string | null
-  food: string | null
-  gold: string | null
-  stone: string | null
-  builders: string | null
+  time: string
+  population: string
+  wood: string
+  food: string
+  gold: string
+  stone: string
+  builders: string
 }
 
 export interface Props {
@@ -125,6 +125,7 @@ export default function BuildOrderTable({
           {
             Header: '',
             accessor: 'action',
+            id: 'jamal',
           },
           {
             Header: '',
