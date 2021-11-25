@@ -1,8 +1,11 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import Invoices from './routes/invoices'
+import Builds from './routes/builds'
 
 const theme = createTheme({
   palette: {
@@ -17,11 +20,17 @@ const theme = createTheme({
 })
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="invoices" element={<Invoices />} />
+          <Route path="builds" element={<Builds />} />
+        </Routes>
+      </ThemeProvider>
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root'),
 )
 

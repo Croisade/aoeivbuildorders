@@ -8,13 +8,16 @@ import MenuItem from '@mui/material/MenuItem'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router-dom'
 import AppBar from './components/AppBar'
 import BuildOrderTable, { BuildOrder } from './components/BuildOrderTable'
 import BuildOrderForm from './components/BuildOrderForm'
 import { CIVILIZATIONS } from './constants'
 import './App.css'
 
+// eslint-disable-next-line react/prop-types
 const App = function App() {
+  const navigate = useNavigate()
   const initialValues: BuildOrder = {
     count: 1,
     time: '',
@@ -35,6 +38,8 @@ const App = function App() {
   const [count3, setCount3] = useState(1)
   const [count4, setCount4] = useState(1)
   const [civ, setCiv] = useState(CIVILIZATIONS[0])
+  const [description, setDescription] = useState('')
+  const [difficulty, setDifficulty] = useState(1)
   const [age1, setAge1] = useState(false)
   const [age2, setAge2] = useState(false)
   const [age3, setAge3] = useState(false)
@@ -62,6 +67,13 @@ const App = function App() {
       return setBuildOrderRowAge4
     }
     return setBuildOrderRowAge4
+  }
+
+  function getButtonColor(activeAge: boolean) {
+    if (activeAge === true) {
+      return 'success'
+    }
+    return 'secondary'
   }
 
   function getActiveStatusFromAll() {
@@ -140,8 +152,18 @@ const App = function App() {
     }
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCiv(event.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setCiv(event.target.value)
+
+  const handleTextChangeOnInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value)
+    return setDescription(event.target.value)
+  }
+
+  const handleDifficultyChange = (event: Event | React.SyntheticEvent<Element, Event>, value: number | number[]) => {
+    if (Array.isArray(value)) {
+      return setDifficulty(value[0])
+    }
+    return setDifficulty(value)
   }
 
   function valuetext(value: number) {
@@ -185,7 +207,7 @@ const App = function App() {
                   <Grid item md={1.5} sm="auto">
                     <Button
                       variant="outlined"
-                      color="secondary"
+                      color={getButtonColor(age1Active)}
                       type="submit"
                       sx={{ width: '80px', height: '38px' }}
                       onClick={() => {
@@ -200,7 +222,7 @@ const App = function App() {
                   <Grid item md={1.5} sm="auto">
                     <Button
                       variant="outlined"
-                      color="secondary"
+                      color={getButtonColor(age2Active)}
                       type="submit"
                       sx={{ width: '80px', height: '38px' }}
                       onClick={() => {
@@ -214,7 +236,7 @@ const App = function App() {
                   <Grid item md={1.5} sm="auto">
                     <Button
                       variant="outlined"
-                      color="secondary"
+                      color={getButtonColor(age3Active)}
                       type="submit"
                       sx={{ width: '80px', height: '38px' }}
                       onClick={() => {
@@ -229,7 +251,7 @@ const App = function App() {
                   <Grid item md={1.5} sm="auto">
                     <Button
                       variant="outlined"
-                      color="secondary"
+                      color={getButtonColor(age4Active)}
                       type="submit"
                       sx={{ width: '80px', height: '38px' }}
                       onClick={() => {
@@ -305,6 +327,8 @@ const App = function App() {
                   id="outlined-multiline-static"
                   label="Description"
                   color="secondary"
+                  value=""
+                  onChange={handleTextChangeOnInput}
                   multiline
                   rows={6}
                   placeholder="Enter Description Here"
@@ -319,6 +343,7 @@ const App = function App() {
                   defaultValue={0}
                   // eslint-disable-next-line react/jsx-no-bind
                   getAriaValueText={valuetext}
+                  onChangeCommitted={handleDifficultyChange}
                   valueLabelDisplay="auto"
                   step={1}
                   marks
@@ -327,7 +352,13 @@ const App = function App() {
                   color="secondary"
                 />
               </Box>
-              <Button variant="contained" color="secondary" type="submit">
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                // eslint-disable-next-line react/prop-types
+                onClick={() => navigate('/builds/', { state: { description, difficulty, jamal: 'jamal' } })}
+              >
                 Share
               </Button>
             </Grid>
