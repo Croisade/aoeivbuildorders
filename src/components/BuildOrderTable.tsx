@@ -56,27 +56,48 @@ export default function BuildOrderTable({
   setBuildOrder: any
   setCount: any
 }) {
+  // @TODO clean this up
+  function splitAtIndex(list: BuildOrder[], index: number) {
+    return [list.slice(0, index), list.slice(index)]
+  }
+
   function subtractBuildOrderCount(buildOrder: BuildOrder[], countFromRow: string): void {
     if (countFromRow === '0' && buildOrder.length === 1) {
       setBuildOrder([])
       setCount(1)
     } else {
       const filtered = filter(buildOrder, x => Number(x.count) !== Number(countFromRow) + 1)
-      const chunkedBuildOrder = chunk(filtered, Number(countFromRow))
-      const concated = concat(
-        chunkedBuildOrder[0],
-        map(chunkedBuildOrder[1], x => {
+
+      if (countFromRow === '0') {
+        const reducedCount = map(filtered, x => {
           const { count } = x
           return { ...x, ...{ count: count - 1 } }
-        }),
-      )
-      const idk = maxBy(concated, x => x.count)
-      const max = Number(idk?.count) + 1
-      if (max < 1) {
-        setCount(1)
+        })
+
+        const idk = maxBy(reducedCount, x => x.count)
+        const max = Number(idk?.count) + 1
+        if (max < 1) {
+          setCount(1)
+        }
+        setCount(max)
+        setBuildOrder(reducedCount)
+      } else {
+        const chunkedBuildOrder = splitAtIndex(filtered, Number(countFromRow))
+        const concated = concat(
+          chunkedBuildOrder[0],
+          map(chunkedBuildOrder[1], x => {
+            const { count } = x
+            return { ...x, ...{ count: count - 1 } }
+          }),
+        )
+        const idk = maxBy(concated, x => x.count)
+        const max = Number(idk?.count) + 1
+        if (max < 1) {
+          setCount(1)
+        }
+        setCount(max)
+        setBuildOrder(concated)
       }
-      setCount(max)
-      setBuildOrder(concated)
     }
   }
 
@@ -125,7 +146,6 @@ export default function BuildOrderTable({
           {
             Header: '',
             accessor: 'action',
-            id: 'jamal',
           },
           {
             Header: '',

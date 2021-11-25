@@ -19,7 +19,10 @@ const App = function App() {
   const [buildOrderRowAge2, setBuildOrderRowAge2] = useState<BuildOrder[]>([])
   const [buildOrderRowAge3, setBuildOrderRowAge3] = useState<BuildOrder[]>([])
   const [buildOrderRowAge4, setBuildOrderRowAge4] = useState<BuildOrder[]>([])
-  const [count, setCount] = useState(1)
+  const [count1, setCount1] = useState(1)
+  const [count2, setCount2] = useState(1)
+  const [count3, setCount3] = useState(1)
+  const [count4, setCount4] = useState(1)
   const [civ, setCiv] = useState(CIVILIZATIONS[0])
   const [age1, setAge1] = useState(false)
   const [age2, setAge2] = useState(false)
@@ -65,6 +68,38 @@ const App = function App() {
       return buildOrderRowAge4
     }
     return buildOrderRowAge4
+  }
+
+  function getActiveSetCount() {
+    if (age1Active === true) {
+      return setCount1
+    }
+    if (age2Active === true) {
+      return setCount2
+    }
+    if (age3Active === true) {
+      return setCount3
+    }
+    if (age4Active === true) {
+      return setCount4
+    }
+    return setCount4
+  }
+
+  function getActiveCount() {
+    if (age1Active === true) {
+      return count1
+    }
+    if (age2Active === true) {
+      return count2
+    }
+    if (age3Active === true) {
+      return count3
+    }
+    if (age4Active === true) {
+      return count4
+    }
+    return count4
   }
 
   function setActive(active: string) {
@@ -115,9 +150,9 @@ const App = function App() {
                 }}
               >
                 <BuildOrderForm
-                  count={count}
+                  count={getActiveCount()}
                   getActiveStatusFromAll={getActiveStatusFromAll}
-                  setCount={setCount}
+                  setCount={getActiveSetCount()}
                   getSetActiveBuildOrderAge={getSetActiveBuildOrderAge}
                   getActiveBuildOrderAge={getActiveBuildOrderAge}
                 />
@@ -195,29 +230,29 @@ const App = function App() {
                   data={buildOrderRowAge1}
                   ageNumber={1}
                   isShown={age1}
-                  setBuildOrder={getSetActiveBuildOrderAge()}
-                  setCount={setCount}
+                  setBuildOrder={setBuildOrderRowAge1}
+                  setCount={setCount1}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge2}
                   ageNumber={2}
                   isShown={age2}
-                  setBuildOrder={getSetActiveBuildOrderAge()}
-                  setCount={setCount}
+                  setBuildOrder={setBuildOrderRowAge2}
+                  setCount={setCount2}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge3}
                   ageNumber={3}
                   isShown={age3}
-                  setBuildOrder={getSetActiveBuildOrderAge()}
-                  setCount={setCount}
+                  setBuildOrder={setBuildOrderRowAge3}
+                  setCount={setCount3}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge4}
                   ageNumber={4}
                   isShown={age4}
-                  setBuildOrder={getSetActiveBuildOrderAge()}
-                  setCount={setCount}
+                  setBuildOrder={setBuildOrderRowAge4}
+                  setCount={setCount4}
                 />
               </Box>
             </Grid>
