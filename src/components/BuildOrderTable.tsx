@@ -12,10 +12,11 @@ import TableBody from '@mui/material/TableBody'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import Table from '@mui/material/Table'
-import chunk from 'lodash/chunk'
+import head from 'lodash/head'
 import concat from 'lodash/concat'
 import filter from 'lodash/filter'
 import maxBy from 'lodash/maxBy'
+import reject from 'lodash/reject'
 import map from 'lodash/map'
 
 // * Look over materialUI tables API's and clean up our grid
@@ -49,12 +50,16 @@ export default function BuildOrderTable({
   isShown,
   setBuildOrder,
   setCount,
+  setBuildFormValues,
+  setTouched,
 }: {
   data: BuildOrder[]
   ageNumber: number
   isShown: boolean
   setBuildOrder: any
   setCount: any
+  setBuildFormValues: any
+  setTouched: any
 }) {
   // @TODO clean this up
   function splitAtIndex(list: BuildOrder[], index: number) {
@@ -99,6 +104,12 @@ export default function BuildOrderTable({
         setBuildOrder(concated)
       }
     }
+  }
+
+  function editBuildOrder(buildOrder: BuildOrder[], index: number) {
+    setTouched(true)
+    const rejection = reject(buildOrder, x => index + 1 !== Number(x.count))
+    setBuildFormValues(head(rejection))
   }
 
   const data = React.useMemo<BuildOrder[]>(() => buildOrderData, [buildOrderData])
@@ -150,7 +161,17 @@ export default function BuildOrderTable({
           {
             Header: '',
             accessor: 'edit',
-            Cell: () => <EditIcon fontSize="small" sx={{ fontSize: '15px' }} />,
+            Cell: (row: Row<BuildOrder>[]) => (
+              <EditIcon
+                fontSize="small"
+                sx={{ fontSize: '15px' }}
+                onClick={() => {
+                  // console.log(row)
+                  // @ts-ignore
+                  editBuildOrder(row.data, row.row!.index)
+                }}
+              />
+            ),
           },
           {
             Header: '',
@@ -194,9 +215,9 @@ export default function BuildOrderTable({
       case 'action':
         return { background: 'rgba(66,66,66,0.08)', width: '80%', minWidth: '400px' }
       case 'edit':
-        return { background: 'rgba(92,66,66,0.08)', ...tenPx }
+        return { background: 'rgba(66,66,66,0.08)', ...tenPx }
       case 'delete':
-        return { background: 'rgba(66,92,66,0.08)', ...tenPx }
+        return { background: 'rgba(66,66,66,0.08)', ...tenPx }
       default:
         break
     }

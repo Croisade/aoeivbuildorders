@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, TextField, Button } from '@mui/material'
 import { useFormik } from 'formik'
 import concat from 'lodash/concat'
+import filter from 'lodash/filter'
 import { BuildOrder } from './BuildOrderTable'
 
 const BuildOrderForm = function formikForm({
@@ -10,31 +11,36 @@ const BuildOrderForm = function formikForm({
   setCount,
   getSetActiveBuildOrderAge,
   getActiveBuildOrderAge,
+  initialValues,
+  touched,
+  setTouched,
 }: {
   getActiveStatusFromAll: () => boolean
   count: number
   setCount: (value: any) => any
   getSetActiveBuildOrderAge: () => (buildOrder: any) => any
   getActiveBuildOrderAge: () => BuildOrder[]
+  initialValues: BuildOrder
+  touched: boolean
+  setTouched: any
 }) {
-  const initialValues: BuildOrder = {
-    count: 1,
-    time: '',
-    population: '',
-    action: '',
-    wood: '',
-    food: '',
-    gold: '',
-    stone: '',
-    builders: '',
-  }
-
   const formik = useFormik({
     initialValues,
+    enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
-      setCount(count + 1)
-      getSetActiveBuildOrderAge()(concat(getActiveBuildOrderAge(), [{ ...values, ...{ count } }]))
-      resetForm()
+      if (touched) {
+        const array = getActiveBuildOrderAge()
+        const filtered = filter(array, x => x.count !== values.count)
+        const arr1 = filtered.slice(0, values.count - 1)
+        const arr2 = filtered.slice(values.count - 1)
+        getSetActiveBuildOrderAge()(concat(arr1, [values], arr2))
+        setTouched(false)
+        resetForm()
+      } else {
+        getSetActiveBuildOrderAge()(concat(getActiveBuildOrderAge(), [{ ...values, ...{ count } }]))
+        setCount(count + 1)
+        resetForm()
+      }
     },
   })
 

@@ -15,6 +15,17 @@ import { CIVILIZATIONS } from './constants'
 import './App.css'
 
 const App = function App() {
+  const initialValues: BuildOrder = {
+    count: 1,
+    time: '',
+    population: '',
+    action: '',
+    wood: '',
+    food: '',
+    gold: '',
+    stone: '',
+    builders: '',
+  }
   const [buildOrderRowAge1, setBuildOrderRowAge1] = useState<BuildOrder[]>([])
   const [buildOrderRowAge2, setBuildOrderRowAge2] = useState<BuildOrder[]>([])
   const [buildOrderRowAge3, setBuildOrderRowAge3] = useState<BuildOrder[]>([])
@@ -32,6 +43,9 @@ const App = function App() {
   const [age2Active, setAge2Active] = useState(false)
   const [age3Active, setAge3Active] = useState(false)
   const [age4Active, setAge4Active] = useState(false)
+
+  const [buildFormValues, setBuildFormValues] = useState(initialValues)
+  const [touched, setTouched] = useState(false)
 
   // @TODO can make more performant using else if
   function getSetActiveBuildOrderAge() {
@@ -155,6 +169,9 @@ const App = function App() {
                   setCount={getActiveSetCount()}
                   getSetActiveBuildOrderAge={getSetActiveBuildOrderAge}
                   getActiveBuildOrderAge={getActiveBuildOrderAge}
+                  initialValues={buildFormValues}
+                  touched={touched}
+                  setTouched={setTouched}
                 />
 
                 <Grid
@@ -232,6 +249,8 @@ const App = function App() {
                   isShown={age1}
                   setBuildOrder={setBuildOrderRowAge1}
                   setCount={setCount1}
+                  setBuildFormValues={setBuildFormValues}
+                  setTouched={setTouched}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge2}
@@ -239,6 +258,8 @@ const App = function App() {
                   isShown={age2}
                   setBuildOrder={setBuildOrderRowAge2}
                   setCount={setCount2}
+                  setBuildFormValues={setBuildFormValues}
+                  setTouched={setTouched}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge3}
@@ -246,6 +267,8 @@ const App = function App() {
                   isShown={age3}
                   setBuildOrder={setBuildOrderRowAge3}
                   setCount={setCount3}
+                  setBuildFormValues={setBuildFormValues}
+                  setTouched={setTouched}
                 />
                 <BuildOrderTable
                   data={buildOrderRowAge4}
@@ -253,6 +276,8 @@ const App = function App() {
                   isShown={age4}
                   setBuildOrder={setBuildOrderRowAge4}
                   setCount={setCount4}
+                  setBuildFormValues={setBuildFormValues}
+                  setTouched={setTouched}
                 />
               </Box>
             </Grid>
