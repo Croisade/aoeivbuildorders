@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import Invoices from './routes/invoices'
 import Builds from './routes/builds'
 import './index.css'
 
@@ -26,7 +25,6 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="invoices" element={<Invoices />} />
           <Route path="builds/:id" element={<Builds />} />
         </Routes>
       </ThemeProvider>
