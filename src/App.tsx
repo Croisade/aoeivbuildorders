@@ -9,10 +9,12 @@ import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 import AppBar from './components/AppBar'
 import BuildOrderTable, { BuildOrder } from './components/BuildOrderTable'
 import BuildOrderForm from './components/BuildOrderForm'
 import { CIVILIZATIONS } from './constants'
+import { valueText } from './utils/Slider'
 import './App.css'
 
 // eslint-disable-next-line react/prop-types
@@ -154,20 +156,13 @@ const App = function App() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setCiv(event.target.value)
 
-  const handleTextChangeOnInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
-    return setDescription(event.target.value)
-  }
+  const handleTextChangeOnInput = (event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
 
   const handleDifficultyChange = (event: Event | React.SyntheticEvent<Element, Event>, value: number | number[]) => {
     if (Array.isArray(value)) {
       return setDifficulty(value[0])
     }
     return setDifficulty(value)
-  }
-
-  function valuetext(value: number) {
-    return `${value}`
   }
 
   return (
@@ -177,6 +172,19 @@ const App = function App() {
         <Typography variant="h3" component="h3" mb={5} mt={2}>
           Construct Your Build Order
         </Typography>
+      </header>
+      <div
+        style={{
+          backgroundColor: '#212121',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 'calc(10px + 2vmin)',
+          color: 'white',
+        }}
+      >
         <Box sx={{ flexGrow: 1, width: '70%' }}>
           <Grid container spacing={5}>
             <Grid item sm={8} xs={12}>
@@ -327,7 +335,7 @@ const App = function App() {
                   id="outlined-multiline-static"
                   label="Description"
                   color="secondary"
-                  value=""
+                  value={description}
                   onChange={handleTextChangeOnInput}
                   multiline
                   rows={6}
@@ -342,7 +350,7 @@ const App = function App() {
                   aria-label="Difficulty"
                   defaultValue={0}
                   // eslint-disable-next-line react/jsx-no-bind
-                  getAriaValueText={valuetext}
+                  getAriaValueText={valueText}
                   onChangeCommitted={handleDifficultyChange}
                   valueLabelDisplay="auto"
                   step={1}
@@ -357,14 +365,26 @@ const App = function App() {
                 color="secondary"
                 type="submit"
                 // eslint-disable-next-line react/prop-types
-                onClick={() => navigate('/builds/', { state: { description, difficulty, jamal: 'jamal' } })}
+                onClick={() =>
+                  navigate(`/builds/${uuidv4()}`, {
+                    state: {
+                      description,
+                      difficulty,
+                      buildOrderRowAge1,
+                      civ,
+                      buildOrderRowAge2,
+                      buildOrderRowAge3,
+                      buildOrderRowAge4,
+                    },
+                  })
+                }
               >
                 Share
               </Button>
             </Grid>
           </Grid>
         </Box>
-      </header>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/function-component-definition */
 import * as React from 'react'
@@ -18,6 +17,7 @@ import filter from 'lodash/filter'
 import maxBy from 'lodash/maxBy'
 import reject from 'lodash/reject'
 import map from 'lodash/map'
+import { returnsStyle, isSubHeader } from '../utils/Table'
 
 // * Look over materialUI tables API's and clean up our grid
 interface ColumnDetails {
@@ -40,8 +40,6 @@ export interface BuildOrder {
 export interface Props {
   data: BuildOrder[]
 }
-
-const tenPx = { width: '10px' }
 
 // @tODO correct types for sethooks
 export default function BuildOrderTable({
@@ -192,48 +190,6 @@ export default function BuildOrderTable({
     ],
     [],
   )
-
-  // @TODO put this in the cell field, less computation the better
-  function returnsStyle(key: string) {
-    switch (key) {
-      case 'count':
-        return { background: 'rgba(97,97,97)', width: '10px' }
-      case 'time':
-        return { background: 'rgba(117, 117, 117, 0.3)', width: '15px' }
-      case 'population':
-        return { background: 'rgba(158, 158, 158, 0.3)', width: '10px' }
-      case 'wood':
-        return { background: 'rgba(199, 79, 12, 0.3)', ...tenPx }
-      case 'food':
-        return { background: 'rgba(204, 95, 59)', ...tenPx }
-      case 'gold':
-        return { background: '#CF8A0A', ...tenPx }
-      case 'stone':
-        return { background: 'rgba(135, 134, 134, 0.47)', ...tenPx }
-      case 'builders':
-        return { background: 'rgba(255, 183, 99, 0.47)', ...tenPx }
-      case 'action':
-        return { background: 'rgba(66,66,66,0.08)', width: '80%', minWidth: '400px' }
-      case 'edit':
-        return { background: 'rgba(66,66,66,0.08)', ...tenPx }
-      case 'delete':
-        return { background: 'rgba(66,66,66,0.08)', ...tenPx }
-      default:
-        break
-    }
-    return {
-      padding: '10px',
-      border: 'solid 1px gray',
-      background: '#424242',
-    }
-  }
-
-  function isSubHeader(number: number) {
-    if (number > 0) {
-      return { display: 'none' }
-    }
-    return {}
-  }
 
   function isTableShown(bool: boolean) {
     const general = { maxWidth: '100%', overflow: 'auto' }

@@ -6,6 +6,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import Invoices from './routes/invoices'
 import Builds from './routes/builds'
+import './index.css'
 
 const theme = createTheme({
   palette: {
