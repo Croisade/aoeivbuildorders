@@ -27,7 +27,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="invoices" element={<Invoices />} />
-          <Route path="builds" element={<Builds />} />
+          <Route path="builds/:id" element={<Builds />} />
         </Routes>
       </ThemeProvider>
     </React.StrictMode>

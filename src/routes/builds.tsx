@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import isEmpty from 'lodash/isEmpty'
 import { Slider, Typography, Box, Grid } from '@mui/material'
@@ -41,20 +42,18 @@ const Build = function Build() {
           minHeight: '100vh',
         }}
       >
-        <Box sx={{ flexGrow: 1, width: '70%' }}>
+        <Box sx={{ flexGrow: 1, width: '60%' }}>
           <Grid container spacing={2}>
-            {isEmpty(description) ? (
-              <div />
-            ) : (
-              <div>
-                <Grid item sm={12}>
+            <Grid item sm={12} sx={{ minWidth: '100%' }}>
+              {isEmpty(description) ? (
+                <div />
+              ) : (
+                <div>
                   <Typography variant="h6">Description</Typography>
-                </Grid>
-                <Grid item sm={12}>
                   <Typography>{description}</Typography>
-                </Grid>
-              </div>
-            )}
+                </div>
+              )}
+            </Grid>
             <Grid item sm={6}>
               <div>
                 <Typography sx={{ textAlign: 'center' }}>Civilization:</Typography>
