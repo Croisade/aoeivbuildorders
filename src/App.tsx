@@ -176,13 +176,14 @@ const App = function App() {
         }}
       >
         <Box sx={{ flexGrow: 1, width: '70%' }}>
-          <Grid container spacing={5}>
+          <Grid container>
             <Grid item sm={8} xs={12}>
               <Box
                 sx={{
-                  '& .MuiTextField-root': { m: 1 },
+                  '& .MuiTextField-root': { m: 0 },
                 }}
               >
+                {/* <Grid container item xl={12} xs={6} mb={4}> */}
                 <BuildOrderForm
                   count={getActiveCount()}
                   getActiveStatusFromAll={getActiveStatusFromAll}
@@ -193,16 +194,10 @@ const App = function App() {
                   touched={touched}
                   setTouched={setTouched}
                 />
+                {/* </Grid> */}
 
-                <Grid
-                  container
-                  item
-                  spacing={0}
-                  sx={{ justifyContent: 'center', alignItems: 'center' }}
-                  mt={3}
-                  xs="auto"
-                >
-                  <Grid item md={1.5} sm="auto">
+                <Grid container item spacing={5}>
+                  <Grid item xl={3} xs={6}>
                     <Button
                       variant="outlined"
                       color={getButtonColor(age1Active)}
@@ -217,7 +212,7 @@ const App = function App() {
                     </Button>
                   </Grid>
 
-                  <Grid item md={1.5} sm="auto">
+                  <Grid item xl={3} xs={6}>
                     <Button
                       variant="outlined"
                       color={getButtonColor(age2Active)}
@@ -231,7 +226,7 @@ const App = function App() {
                       Age II
                     </Button>
                   </Grid>
-                  <Grid item md={1.5} sm="auto">
+                  <Grid item xl={3} xs={6}>
                     <Button
                       variant="outlined"
                       color={getButtonColor(age3Active)}
@@ -246,7 +241,7 @@ const App = function App() {
                     </Button>
                   </Grid>
 
-                  <Grid item md={1.5} sm="auto">
+                  <Grid item xl={3} xs={6}>
                     <Button
                       variant="outlined"
                       color={getButtonColor(age4Active)}
@@ -262,7 +257,7 @@ const App = function App() {
                   </Grid>
                 </Grid>
               </Box>
-              <Box mt={5}>
+              <Box mt={5} mb={5}>
                 <BuildOrderTable
                   data={buildOrderRowAge1}
                   ageNumber={1}
@@ -302,7 +297,7 @@ const App = function App() {
               </Box>
             </Grid>
 
-            <Grid item sm={2} xs="auto" ml={0}>
+            <Grid item sm={2} xs="auto" ml={-2}>
               <TextField
                 id="outlined-select-civilization"
                 color="secondary"

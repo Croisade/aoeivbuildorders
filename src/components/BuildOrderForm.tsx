@@ -48,7 +48,7 @@ const BuildOrderForm = function formikForm({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container item spacing={3} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item sm={1.14} xs={6}>
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="time"
@@ -62,7 +62,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item md={1.14} xs={6}>
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="population"
@@ -76,7 +76,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={1.14} xs={6}>
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="wood"
@@ -90,7 +90,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={1.14} xs="auto">
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="food"
@@ -104,7 +104,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={1.14} xs="auto">
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="gold"
@@ -118,7 +118,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={1.14} xs="auto">
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="stone"
@@ -132,7 +132,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={1.14} xs="auto">
+          <Grid item lg={1.14} xs="auto">
             <TextField
               color="secondary"
               name="builders"
@@ -146,7 +146,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={8} xs={12}>
+          <Grid item lg={8} xs={12}>
             <TextField
               color="secondary"
               name="action"
@@ -160,7 +160,7 @@ const BuildOrderForm = function formikForm({
             />
           </Grid>
 
-          <Grid item sm={12} xs={12}>
+          <Grid item lg={12} xs={12}>
             <Button
               variant="contained"
               color="secondary"

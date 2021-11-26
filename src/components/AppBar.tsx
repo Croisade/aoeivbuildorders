@@ -13,7 +13,7 @@ const ButtonAppBar = function ButtonAppBar() {
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 0.1 }}>
             <Link href="/" color="inherit" underline="none">
-              AoEIVBuildOrders.gg
+              AoEIVBuildOrders
             </Link>
           </Typography>
         </Toolbar>
