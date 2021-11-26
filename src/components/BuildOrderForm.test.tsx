@@ -2,6 +2,7 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import BuildOrderForm from './BuildOrderForm'
+import { initialValues } from '../constants'
 
 describe('Submit', () => {
   describe('with valid inputs', () => {
@@ -18,6 +19,9 @@ describe('Submit', () => {
           setCount={setCount}
           getSetActiveBuildOrderAge={getSetActiveBuildOrderAge}
           getActiveBuildOrderAge={getActiveBuildOrderAge}
+          initialValues={initialValues}
+          touched={false}
+          setTouched={jest.fn()}
         />,
       )
 

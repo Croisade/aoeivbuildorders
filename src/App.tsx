@@ -13,24 +13,14 @@ import { v4 as uuidv4 } from 'uuid'
 import AppBar from './components/AppBar'
 import BuildOrderTable, { BuildOrder } from './components/BuildOrderTable'
 import BuildOrderForm from './components/BuildOrderForm'
-import { CIVILIZATIONS } from './constants'
+import { CIVILIZATIONS, initialValues } from './constants'
 import { valueText } from './utils/Slider'
 import './App.css'
 
 // eslint-disable-next-line react/prop-types
 const App = function App() {
   const navigate = useNavigate()
-  const initialValues: BuildOrder = {
-    count: 1,
-    time: '',
-    population: '',
-    action: '',
-    wood: '',
-    food: '',
-    gold: '',
-    stone: '',
-    builders: '',
-  }
+
   const [buildOrderRowAge1, setBuildOrderRowAge1] = useState<BuildOrder[]>([])
   const [buildOrderRowAge2, setBuildOrderRowAge2] = useState<BuildOrder[]>([])
   const [buildOrderRowAge3, setBuildOrderRowAge3] = useState<BuildOrder[]>([])
