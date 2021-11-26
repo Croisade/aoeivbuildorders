@@ -1,0 +1,4 @@
+database:
+  database: BE_test
+
+auth-dummy-login: true
