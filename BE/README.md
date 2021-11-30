@@ -1,6 +1,13 @@
 ## Database Setup
 
-[Install MongoDB](https://docs.mongodb.com/manual/installation/)
+After installing Postgres, run:
+
+```
+createuser BE --pwprompt --superuser
+# Enter password BE when prompted
+createdb BE
+createdb BE_test
+```
 
 ## Haskell Setup
 

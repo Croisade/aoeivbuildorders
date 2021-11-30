@@ -16,3 +16,18 @@ Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived
     userId UserId Maybe
     deriving Eq
     deriving Show
+BuildOrder
+    Id Text
+    description Text
+    difficulty Int
+    civ Text
+BuildOrderRow
+    bOId BuildOrderId
+    count Int
+    time Text
+    population Text
+    wood Text
+    food Text
+    gold Text
+    stone Text
+    builders Text

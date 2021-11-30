@@ -196,66 +196,68 @@ const App = function App() {
                 />
                 {/* </Grid> */}
 
-                <Grid container item spacing={5}>
-                  <Grid item xl={3} xs={6}>
-                    <Button
-                      variant="outlined"
-                      color={getButtonColor(age1Active)}
-                      type="submit"
-                      sx={{ width: '80px', height: '38px' }}
-                      onClick={() => {
-                        setAge1(true)
-                        setActive('age1')
-                      }}
-                    >
-                      Age I
-                    </Button>
-                  </Grid>
+                <Box sx={{ alignItems: 'center', justifyContent: 'center' }}>
+                  <Grid container item spacing={5} mt={4}>
+                    <Grid item xl={6} xs={6}>
+                      <Button
+                        variant="outlined"
+                        color={getButtonColor(age1Active)}
+                        type="submit"
+                        sx={{ width: '80px', height: '38px' }}
+                        onClick={() => {
+                          setAge1(true)
+                          setActive('age1')
+                        }}
+                      >
+                        Age I
+                      </Button>
+                    </Grid>
 
-                  <Grid item xl={3} xs={6}>
-                    <Button
-                      variant="outlined"
-                      color={getButtonColor(age2Active)}
-                      type="submit"
-                      sx={{ width: '80px', height: '38px' }}
-                      onClick={() => {
-                        setAge2(true)
-                        setActive('age2')
-                      }}
-                    >
-                      Age II
-                    </Button>
-                  </Grid>
-                  <Grid item xl={3} xs={6}>
-                    <Button
-                      variant="outlined"
-                      color={getButtonColor(age3Active)}
-                      type="submit"
-                      sx={{ width: '80px', height: '38px' }}
-                      onClick={() => {
-                        setAge3(true)
-                        setActive('age3')
-                      }}
-                    >
-                      Age III
-                    </Button>
-                  </Grid>
+                    <Grid item xl={6} xs={6}>
+                      <Button
+                        variant="outlined"
+                        color={getButtonColor(age2Active)}
+                        type="submit"
+                        sx={{ width: '80px', height: '38px' }}
+                        onClick={() => {
+                          setAge2(true)
+                          setActive('age2')
+                        }}
+                      >
+                        Age II
+                      </Button>
+                    </Grid>
+                    <Grid item xl={6} xs={6}>
+                      <Button
+                        variant="outlined"
+                        color={getButtonColor(age3Active)}
+                        type="submit"
+                        sx={{ width: '80px', height: '38px' }}
+                        onClick={() => {
+                          setAge3(true)
+                          setActive('age3')
+                        }}
+                      >
+                        Age III
+                      </Button>
+                    </Grid>
 
-                  <Grid item xl={3} xs={6}>
-                    <Button
-                      variant="outlined"
-                      color={getButtonColor(age4Active)}
-                      type="submit"
-                      sx={{ width: '80px', height: '38px' }}
-                      onClick={() => {
-                        setAge4(true)
-                        setActive('age4')
-                      }}
-                    >
-                      Age IV
-                    </Button>
+                    <Grid item xl={6} xs={6}>
+                      <Button
+                        variant="outlined"
+                        color={getButtonColor(age4Active)}
+                        type="submit"
+                        sx={{ width: '80px', height: '38px' }}
+                        onClick={() => {
+                          setAge4(true)
+                          setActive('age4')
+                        }}
+                      >
+                        Age IV
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </Box>
               </Box>
               <Box mt={5} mb={5}>
                 <BuildOrderTable

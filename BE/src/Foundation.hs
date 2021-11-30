@@ -10,18 +10,18 @@
 
 module Foundation where
 
-import Database.Persist.MongoDB hiding (master)
 import Import.NoFoundation
-import Text.Hamlet                 (hamletFile)
-import Text.Jasmine                (minifym)
-import Control.Monad.Logger        (LogSource)
+import Database.Persist.Sql (ConnectionPool, runSqlPool)
+import Text.Hamlet          (hamletFile)
+import Text.Jasmine         (minifym)
+import Control.Monad.Logger (LogSource)
 
 -- Used only when in "auth-dummy-login" setting is enabled.
 import Yesod.Auth.Dummy
 
-import Yesod.Auth.OpenId           (authOpenId, IdentifierType (Claimed))
-import Yesod.Core.Types            (Logger)
-import Yesod.Default.Util          (addStaticContentExternal)
+import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
+import Yesod.Default.Util   (addStaticContentExternal)
+import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
 import qualified Data.CaseInsensitive as CI
 import qualified Data.Text.Encoding as TE
@@ -58,16 +58,16 @@ data MenuTypes
 -- http://www.yesodweb.com/book/scaffolding-and-the-site-template#scaffolding-and-the-site-template_foundation_and_application_modules
 --
 -- This function also generates the following type synonyms:
--- type Handler = HandlerT App IO
--- type Widget = WidgetT App IO ()
-mkYesodData "App" $(parseRoutesFile "config/routes")
+-- type Handler = HandlerFor App
+-- type Widget = WidgetFor App ()
+mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
 
 -- | A convenient synonym for creating forms.
 type Form x = Html -> MForm (HandlerFor App) (FormResult x, Widget)
 
 -- | A convenient synonym for database access functions.
 type DB a = forall (m :: * -> *).
-    (MonadIO m) => ReaderT MongoContext m a
+    (MonadUnliftIO m) => ReaderT SqlBackend m a
 
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
@@ -222,14 +222,15 @@ instance YesodBreadcrumbs App where
 
 -- How to run database actions.
 instance YesodPersist App where
-    type YesodPersistBackend App = MongoContext
-    runDB :: ReaderT MongoContext Handler a -> Handler a
+    type YesodPersistBackend App = SqlBackend
+    runDB :: SqlPersistT Handler a -> Handler a
     runDB action = do
         master <- getYesod
-        runMongoDBPool
-            (mgAccessMode $ appDatabaseConf $ appSettings master)
-            action
-            (appConnPool master)
+        runSqlPool action $ appConnPool master
+
+instance YesodPersistRunner App where
+    getDBRunner :: Handler (DBRunner App, Handler ())
+    getDBRunner = defaultGetDBRunner appConnPool
 
 instance YesodAuth App where
     type AuthId App = UserId
