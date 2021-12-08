@@ -24,15 +24,35 @@ source-repository head
 
 library
   exposed-modules:
+      Db
       Lib
+      Starter
   other-modules:
       Paths_BE
   hs-source-dirs:
       src
   build-depends:
       aeson
+    , attoparsec
     , base >=4.7 && <5
+    , base-compat-batteries
+    , blaze-html
+    , blaze-markup
+    , bytestring
+    , directory
+    , http-client
+    , http-media
+    , lucid
+    , mtl
+    , postgresql-simple
+    , resource-pool
+    , servant
+    , servant-client
     , servant-server
+    , string-conversions
+    , text
+    , time
+    , uuid
     , wai
     , warp
   default-language: Haskell2010
@@ -47,8 +67,26 @@ executable BE-exe
   build-depends:
       BE
     , aeson
+    , attoparsec
     , base
+    , base-compat-batteries
+    , blaze-html
+    , blaze-markup
+    , bytestring
+    , directory
+    , http-client
+    , http-media
+    , lucid
+    , mtl
+    , postgresql-simple
+    , resource-pool
+    , servant
+    , servant-client
     , servant-server
+    , string-conversions
+    , text
+    , time
+    , uuid
     , wai
     , warp
   default-language: Haskell2010
@@ -64,11 +102,29 @@ test-suite BE-test
   build-depends:
       BE
     , aeson
+    , attoparsec
     , base
+    , base-compat-batteries
+    , blaze-html
+    , blaze-markup
+    , bytestring
+    , directory
     , hspec
     , hspec-wai
     , hspec-wai-json
+    , http-client
+    , http-media
+    , lucid
+    , mtl
+    , postgresql-simple
+    , resource-pool
+    , servant
+    , servant-client
     , servant-server
+    , string-conversions
+    , text
+    , time
+    , uuid
     , wai
     , warp
   default-language: Haskell2010
