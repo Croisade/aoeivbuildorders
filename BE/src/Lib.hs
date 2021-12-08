@@ -55,19 +55,24 @@ import Servant.API
     DeleteNoContent,
     Get,
     JSON,
+    Post,
     type (:<|>) ((:<|>)),
     type (:>),
   )
+import Servant.Server (Handler)
 import Servant.Types.SourceT (source)
 import System.Directory
 import Text.Blaze
 import qualified Text.Blaze.Html
 import Text.Blaze.Html.Renderer.Utf8
 
-type UserAPI1 = "buildOrder" :> Capture "id" UUID :> Post '[JSON] BuildOrder
+type API =
+  "buildOrder" :> Post '[JSON] BuildOrder
+    :<|> "buildOrder" :> Capture "id" UUID :> Get '[JSON] BuildOrder
 
 data BuildOrder = BuildOrder
-  { description :: String,
+  { id :: UUID,
+    description :: String,
     difficulty :: Int,
     civ :: String,
     buildOrderRowAge1 :: BuildOrderTable,
@@ -89,6 +94,17 @@ data BuildOrderTable = BuildOrderTable
     builders :: String
   }
   deriving (Show, Eq, Generic)
+
+createBuildOrder :: BuildOrder -> Handler BuildOrder
+createBuildOrder = return undefined
+
+getBuildORder :: UUID -> Handler BuildOrder
+getBuildORder = return undefined
+
+server :: Server API
+server =
+  createBuildOrder
+    :<|> getBuildOrder
 
 start :: a
 start = undefined
