@@ -42,6 +42,18 @@ dependencies:
   - base-compat-batteries
   - lucid
   - uuid
+  - persistent-postgresql
+  - libiserv
+  - wai-extra
+  - monad-logger
+  - transformers
+  - katip
+  - fast-logger
+  - monad-metrics
+  - safe-exceptions
+  - persistent
+  - servant-js
+  - safe
 
 library:
   source-dirs: src
@@ -57,6 +69,9 @@ executables:
     dependencies:
       - base
       - BE
+    when:
+      - condition: false
+        other-modules: Paths_BE
 
 tests:
   BE-test:
@@ -73,3 +88,4 @@ tests:
       - hspec-wai
       - hspec-wai-json
       - aeson
+
