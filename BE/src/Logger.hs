@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Logger
     ( adapt
-    -- , defaultLogEnv
+    , defaultLogEnv
     , logMsg
     , runKatipT
     , KatipT(..)
@@ -13,29 +13,14 @@ module Logger
 import Control.Monad.Logger
 import qualified Control.Monad.Logger as Logger
 import Katip
-    ( defaultScribeSettings,
-      initLogEnv,
-      logMsg,
-      logStr,
-      registerScribe,
-      runKatipT,
-      mkHandleScribe,
-      Katip(..),
-      KatipT(..),
-      LogEnv,
-      LogStr,
-      Namespace(Namespace),
-      Severity(..),
-      Verbosity(V2),
-      ColorStrategy(ColorIfTerminal) )
 import qualified System.IO as IO
 import qualified System.Log.FastLogger as FastLogger
 
--- defaultLogEnv :: IO LogEnv
--- defaultLogEnv = do
---     handleScribe <- mkHandleScribe ColorIfTerminal IO.stdout DebugS V2
---     env <- initLogEnv "servant-persistent" "production"
---     registerScribe "stdout" handleScribe defaultScribeSettings env
+defaultLogEnv :: IO LogEnv
+defaultLogEnv = do
+    handleScribe <- mkHandleScribe ColorIfTerminal IO.stdout DebugS V2
+    env <- initLogEnv "servant-persistent" "production"
+    registerScribe "stdout" handleScribe defaultScribeSettings env
 
 fromLevel :: LogLevel -> Severity
 fromLevel LevelDebug     = DebugS

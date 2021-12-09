@@ -1,13 +1,10 @@
 cradle:
   stack:
+    - path: "./app"
+      component: "servant-persistent:exe:perservant"
+
     - path: "./src"
-      component: "BE:lib"
-
-    - path: "./app/Main.hs"
-      component: "BE:exe:BE-exe"
-
-    - path: "./app/Paths_BE.hs"
-      component: "BE:exe:BE-exe"
+      component: "servant-persistent:lib"
 
     - path: "./test"
-      component: "BE:test:BE-test"
+      component: "servant-persistent:test:servant-persistent-test"

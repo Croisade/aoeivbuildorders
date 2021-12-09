@@ -5,16 +5,15 @@
 
 packages:
 - completed:
-    hackage: servant-js-0.9.4.2@sha256:8376ab122b48427f190e9289e659a68dc382f1739ac610514f524a2c22386a52,3531
+    hackage: katip-0.5.4.0@sha256:6fd2c835e940f8d07525c62755df5814a5719c005e43bbc875ddbdae8fe6af60,4289
     pantry-tree:
-      size: 961
-      sha256: c28356e34444a1ce680b3f7e935d59348ab79dc25db7dbea8db3330d7c52c4e8
+      size: 1140
+      sha256: 6b53797d52da581ec75f3e75b5ef3f585a6018d15f92ac59fa5143af34e85c85
   original:
-    hackage: servant-js-0.9.4.2
+    hackage: katip-0.5.4.0
 snapshots:
 - completed:
-    size: 586296
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
-    sha256: 63539429076b7ebbab6daa7656cfb079393bf644971156dc349d7c0453694ac2
-  original:
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
+    size: 507418
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/11/8.yaml
+    sha256: 2fc510eec19e4aecb06e5b2d7faa9a4004b55265fb5f13eb09b2be885726e810
+  original: lts-11.8
