@@ -5,15 +5,29 @@
 
 packages:
 - completed:
-    hackage: katip-0.5.4.0@sha256:6fd2c835e940f8d07525c62755df5814a5719c005e43bbc875ddbdae8fe6af60,4289
+    hackage: morpheus-graphql-core-0.13.0@sha256:af4c0cc0f5c84cbcb85486329574f2ced98326be4fedd8a7fa116bf783d5a8b6,6774
     pantry-tree:
-      size: 1140
-      sha256: 6b53797d52da581ec75f3e75b5ef3f585a6018d15f92ac59fa5143af34e85c85
+      size: 8516
+      sha256: f0155c18930d61ebb6b1f5d81321bdf49f41dffbab3f9b07a6cc3785c540ac9b
   original:
-    hackage: katip-0.5.4.0
+    hackage: morpheus-graphql-core-0.13.0
+- completed:
+    hackage: morpheus-graphql-0.13.0@sha256:d8173116f630ecf264747bf31a823126452f144e1802d236b64efcf8677289cb,28007
+    pantry-tree:
+      size: 40014
+      sha256: 5b390bba65d00644b0c99d7cbda308d1ff0706a33c90523d6cfcdd5005cab90d
+  original:
+    hackage: morpheus-graphql-0.13.0
+- completed:
+    hackage: postgresql-simple-url-0.2.1.0@sha256:25aa9dca3c05b2c66b9336907d9300f1312fbdfa54e0d395b52d1a1e6579810a,1837
+    pantry-tree:
+      size: 397
+      sha256: fcd1457d9463ac9d2261d538c42a283761eb253c9bb230f6df450209348a38f8
+  original:
+    hackage: postgresql-simple-url-0.2.1.0
 snapshots:
 - completed:
-    size: 507418
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/11/8.yaml
-    sha256: 2fc510eec19e4aecb06e5b2d7faa9a4004b55265fb5f13eb09b2be885726e810
-  original: lts-11.8
+    size: 494635
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/15/12.yaml
+    sha256: a71c4293d8f461f455ff0d9815dfe4ab2f1adacd7e0bbc9a218f46ced8c4929a
+  original: lts-15.12
