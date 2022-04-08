@@ -11,13 +11,42 @@ type Session {
     user: User!
 }
 
+type BuildOrderGQL {
+    uuid: String!
+    count: Int!
+    action: String!
+    time: String!
+    population: String!
+    wood: String!
+    food: String!
+    gold: String!
+    stone: String!
+    builders: String!
+}
+
+input BuildOrderInput {
+    buildOrderId: String
+    uuid: String!
+    count: Int
+    action: String
+    time: String
+    population: String
+    wood: String
+    food: String
+    gold: String
+    stone: String!
+    builders: String!
+}
+
 type Query {
     login(email: String!, password: String!): Session!
     myUserInfo: User!
+    buildOrder(uuid: String!): BuildOrderGQL!
     allUsers: [User!]!
 }
 
 type Mutation {
     register(email: String!, password: String!, name: String!): Session!
+    registerBuildOrder(uuid: String!, count: Int!, action: String!, time: String!, population: String!, wood: String!, food: String!, gold: String!, stone: String!, builders: String!): BuildOrderGQL!
     changePassword(oldPassword: String!, newPassword: String!): Boolean!
 }

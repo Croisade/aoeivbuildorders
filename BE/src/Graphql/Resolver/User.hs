@@ -10,7 +10,7 @@ import Control.Monad.Trans (MonadIO, MonadTrans, liftIO)
 import qualified Data.ByteString.Lazy.Char8 as B
 import Data.Morpheus (interpreter)
 import Data.Morpheus.Document (importGQLDocument)
-import Data.Morpheus.Types
+import Data.Morpheus.Types ( lift, QUERY, MUTATION )
 import Data.Morpheus.Types.Internal.AST (OperationType)
 import Data.Text (Text)
 import qualified Data.Text as T

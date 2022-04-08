@@ -2,6 +2,14 @@ module Database.BuildOrder where
 
 import GHC.Int (Int64)
 import Opaleye
+    ( toFields,
+      rCount,
+      (.==),
+      restrict,
+      sqlString,
+      selectTable,
+      Insert(..),
+      Select )
 import Database.Model
     ( BuildOrderT(BuildOrder, buildOrderId, count, action, time,
                   population, wood, food, gold, stone, builders, uuid),
@@ -16,8 +24,8 @@ buildOrderSelect :: Select BuildOrderField
 buildOrderSelect = selectTable buildOrderTable
 
 -------------------------------------------------------------------------------
-insertBuildOrder :: (Int, Text, Text, Text, Text, Text, Text, Text, Text, Text) -> Insert Int64
-insertBuildOrder (count, action, time, population, wood, food, gold, stone, builders, uuid) =
+insertBuildOrder :: (Text, Int, Text, Text, Text, Text, Text, Text, Text, Text) -> Insert Int64
+insertBuildOrder (uuid, count, action, time, population, wood, food, gold, stone, builders) =
   Insert
     { iTable = buildOrderTable,
       iRows =
@@ -47,3 +55,10 @@ findBuildOrderByID uuid =
         let buildOrderDetail = record buildOrder
         restrict -< Database.Model.uuid buildOrderDetail .== toFields uuid
         returnA -< buildOrder
+
+-- findBuildOrderByID' :: Text -> Select BuildOrderField
+-- findBuildOrderByID' reqId =
+--   proc () -> do
+--   row@(_, uuid, _, _, _, _, _, _, _, _, _) <- buildOrderSelect -< ()
+--   restrict -< uuid .== sqlString reqId
+--   returnA -< row
