@@ -205,9 +205,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@gardinerjamal](https://twitter.com/gardinerjamal) 
+[@gardinerjamal](https://twitter.com/gardinerjamal) 
 
-Project Link: [https://github.com/croisade/aoeivbuildorders](https://github.com/croisade/aoeivbuildorders)
+ [https://github.com/croisade/aoeivbuildorders](https://github.com/croisade/aoeivbuildorders)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
