@@ -28,6 +28,47 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: buildorders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.buildorders (
+    id integer NOT NULL,
+    uuid character varying NOT NULL,
+    count integer NOT NULL,
+    action character varying NOT NULL,
+    "time" character varying NOT NULL,
+    population character varying NOT NULL,
+    wood character varying NOT NULL,
+    food character varying NOT NULL,
+    gold character varying NOT NULL,
+    stone character varying NOT NULL,
+    builders character varying NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: buildorders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.buildorders_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: buildorders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.buildorders_id_seq OWNED BY public.buildorders.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -71,10 +112,25 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: buildorders id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.buildorders ALTER COLUMN id SET DEFAULT nextval('public.buildorders_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: buildorders buildorders_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.buildorders
+    ADD CONSTRAINT buildorders_uuid_key UNIQUE (uuid);
 
 
 --
@@ -94,6 +150,20 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: buildorders_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX buildorders_id ON public.buildorders USING btree (id);
+
+
+--
+-- Name: buildorders_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX buildorders_uuid ON public.buildorders USING btree (uuid);
+
+
+--
 -- Name: users_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -105,6 +175,13 @@ CREATE UNIQUE INDEX users_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX users_id ON public.users USING btree (id);
+
+
+--
+-- Name: buildorders buildorders_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER buildorders_updated_at BEFORE UPDATE ON public.buildorders FOR EACH ROW EXECUTE FUNCTION public.update_timestamp();
 
 
 --
@@ -125,4 +202,5 @@ CREATE TRIGGER users_updated_at BEFORE UPDATE ON public.users FOR EACH ROW EXECU
 
 INSERT INTO public.schema_migrations (version) VALUES
     ('20200104122356'),
-    ('20200112080004');
+    ('20200112080004'),
+    ('20220409130228');

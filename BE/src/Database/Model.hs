@@ -129,7 +129,7 @@ userTable =
 -------------------------------------------------------------------------------
 buildOrderTable :: Table BuildOrderWriteField BuildOrderField
 buildOrderTable =
-  table "buildOrders" . pEntity . withTimestampFields $
+  table "buildorders" . pEntity . withTimestampFields $
     pBuildOrder
      BuildOrder
         { buildOrderId = tableField "id",

@@ -31,14 +31,13 @@ services:
       - 8080:8080
 
   dbmate:
-    image: amacneil/dbmate:v1.8.0
+    image: amacneil/dbmate:1.15.0
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable 
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
     depends_on:
       - db
     volumes:
-      - ./db:/db/
+      - ./db:/db
     command: --wait up
-
 volumes:
   db-data:
